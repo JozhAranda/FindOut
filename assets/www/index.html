@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Find Out Maps</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.0/css/bootstrap.css" rel="stylesheet">
+    <style>
+    html, body, #map-canvas {
+        height: 100%;
+    }
+	h1, a{
+		font-family: 'Open Sans', sans-serif;
+		margin:0px;padding:0px;
+	}
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script>
+		var point1 = new google.maps.LatLng(32.508300, -116.988700);
+		var point2 = new google.maps.LatLng(32.52916679937918, -117.03615725040436);
+		var point3 = new google.maps.LatLng(32.530804051249866, -117.03653812408447);
+		
+		function initialize(){	
+			var mapProp = {
+			  center:point1,
+			  zoom:13,
+			  mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+
+			var map=new google.maps.Map(document.getElementById("map-canvas"),mapProp);
+			
+			var infowindow1 = new google.maps.InfoWindow({
+			  content:"Reggae Latino 2013 con Dread Mar I y Zona Ganjah <br> s&aacute;b 07 dic 2013 <br> Taquillas de Camino Real, El Foro y Auditorio de Tijuana. <br> Aprovecha y compra en preventa, los primeros mil boletos costar&aacute;n s&oacute;lo $250 pesos y habr&aacute; una zona numerada y exclusiva de $200 boletos a $550 pesos."
+			});			
+			var infowindow2 = new google.maps.InfoWindow({
+			  content:"Los Claxons y Jumbo <br> s&aacute;bado 30 nov 2013 19:00 horas. <br> Puntos de venta: TAQUILLAexpress Camino Real / Auditorio / El Foro."
+			});			
+			var infowindow3 = new google.maps.InfoWindow({
+			  content:"Los Bunkers <br> vie 06 dic 2013. <br> Puntos de venta: Preventa $200 pesos, Black Box."
+			});
+
+			var marker=new google.maps.Marker({
+			  position:point1,
+			});			
+			var marker2=new google.maps.Marker({
+			  position:point2,
+			});	
+			var marker3=new google.maps.Marker({
+			  position:point3,
+			});
+		
+			marker.setMap(map);
+			google.maps.event.addListener(marker,'click',function() {
+			  map.setZoom(18);
+			  map.setCenter(marker.getPosition());
+			});
+			marker2.setMap(map);
+			google.maps.event.addListener(marker2,'click',function() {
+			  map.setZoom(18);
+			  map.setCenter(marker2.getPosition());
+			});
+			marker3.setMap(map);
+			google.maps.event.addListener(marker3,'click',function() {
+			  map.setZoom(18);
+			  map.setCenter(marker3.getPosition());
+			});
+
+			google.maps.event.addListener(marker, 'click', function() {
+			  infowindow1.open(map,marker);
+			});
+			google.maps.event.addListener(marker2, 'click', function() {
+			  infowindow2.open(map,marker2);
+			});
+			google.maps.event.addListener(marker3, 'click', function() {
+			  infowindow3.open(map,marker3);
+			});
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
